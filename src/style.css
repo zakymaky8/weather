@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+body {
+    background-image: url('./weath4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    background: rgba(170, 102, 170, 0.3);
+    justify-content: space-around;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    box-shadow: 3px 3px 9px 4px black;
+}
+.logo {
+    display: flex;
+    gap: 4px
+}
+.logo  h1{
+    font-weight: 100;
+}
+.menu {
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+.menu li {
+    padding: 6px 10px 6px 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 9px 2px black;
+    font-weight: 1000;
+    letter-spacing: 2px;
+}
+nav{
+    width: 40%;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    align-self: center;
+}
+form  input {
+    height: 40px;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 3px groove black;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: 1000;
+    text-align: center;
+}
+input[type='search']:focus {
+    outline: none;
+}
+
+form input::placeholder {
+    color: rgb(0, 0, 0, 0.5);
+}
+
+.detail {
+    color: rgba(5, 5, 0, 0.901);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+    flex: 1 1 auto;
+    margin-bottom: 100px;
+    flex-wrap: wrap;
+}
+
+.forecast {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1 1 auto;
+    justify-content: space-between;
+}
+.forecast .menu {
+    justify-content: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+
+}
+.fore-detail {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.hours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+    list-style-type: none;
+}
+.hours > div, .toggler{
+    padding: 3px 5px 3px 5px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 9px 2px black;
+    font-weight: 1000;
+    flex: 1 1 auto;
+}
+.toggler {
+    flex: 0 1 auto;
+    width: 60px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.toggler div {
+    flex: 1 1 auto;
+    padding: 4px;
+
+}
+#giphy {
+    border: 6px groove rgb(11, 180, 180);
+    border-radius: 20px;
+    opacity: .8;
+}
+
+#dialog {
+    position: absolute;
+    top: 30%;
+    left: 36%;
+    border: 10px groove rgb(0, 0, 255, 0.5);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    color: rgb(255, 204, 204);
+}
+#dialog::backdrop {
+    background: rgb(0, 0, 0, 0.9);
+
+}
+#online {
+    background: rgb(0, 128, 0, 0.9);
+    height: 30px;
+    text-align: center;
+    padding-top: 5px;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    visibility: hidden;
+    filter: brightness(300%);
+}
+.err {
+    color: red
+}
