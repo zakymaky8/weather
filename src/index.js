@@ -19,6 +19,7 @@ const giphyImg = document.querySelector('#giphy')
 
 const onlineBadge = document.querySelector('#online')
 const dialog = document.querySelector('#dialog');
+const spelNotice = document.querySelector('#spell-notice')
 
 //contents on menu
 const detail = document.querySelector('.detail')
@@ -128,8 +129,6 @@ function fetchGiphy(text) {
         .then(data => giphyImg.src = data.data.images.original.url)
         .catch(()=>giphyImg.src = notfound)
 }
-
-
 
 // focuses
 function addBg(el1, el2, el3) {
@@ -303,11 +302,18 @@ window.onload = async() =>{
 //search trigerer
 
 trigger.addEventListener('click', async (e)=>{
-    dialog.showModal()
     e.preventDefault();
-    data = await getRequiredData(issuDay)
-    filtereData()
-    fetchGiphy(requiredData.current.text)
+    dialog.showModal()
+    try {
+        data = await getRequiredData(issuDay)
+        filtereData()
+        fetchGiphy(requiredData.current.text)
+    }
+    catch (e) {
+        srch.value = 'Addis Ababa';
+        spelNotice.style.display = 'inline'
+        setTimeout(()=>spelNotice.style.display='none',2000)
+    }
 })
 
 // scale togglers
@@ -329,7 +335,7 @@ today.onclick = async () => {
     issuDay = 0;
     addBg(today, tomo, nexTomo)
     data = await getRequiredData(0);
-    await filtereData()
+    filtereData()
 }
 
 tomo.onclick = async () => {
