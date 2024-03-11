@@ -4,7 +4,8 @@
   "description": "Simple weather app using weather-API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ghpages": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "zekaryas",
