@@ -28,10 +28,12 @@ body {
 }
 .logo {
     display: flex;
-    gap: 4px
+    gap: 4px;
+    user-select: none;
 }
 .logo  h1{
     font-weight: 100;
+    z-index: 1;
 }
 .menu {
     display: flex;
@@ -50,10 +52,10 @@ ul {
     box-shadow: 2px 2px 9px 2px black;
     font-weight: 1000;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 nav{
     width: 40%;
-    cursor: pointer;
 }
 
 form {
@@ -61,6 +63,7 @@ form {
     align-items: center;
     margin-bottom: 30px;
     align-self: center;
+    position: relative;
 }
 form  input {
     height: 40px;
@@ -81,6 +84,21 @@ input[type='search']:focus {
 
 form input::placeholder {
     color: rgb(0, 0, 0, 0.5);
+}
+
+#searc {
+    position: absolute;
+    top: 100%;
+    font-size: 13px; 
+    margin: 5px;
+    padding: 3px 6px 3px 6px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 9px 2px white;
+    color: azure;
+    background: black;
+}
+#srch-value {
+    color: rgb(90, 255, 13);
 }
 
 .detail {
@@ -104,8 +122,10 @@ form input::placeholder {
 .forecast .menu {
     justify-content: center;
     flex-wrap: wrap;
-    cursor: pointer;
 
+}
+.forecast .menu li {
+    cursor: pointer;
 }
 .fore-detail {
     display: flex;
@@ -121,7 +141,7 @@ form input::placeholder {
     justify-content: space-around;
     list-style-type: none;
 }
-.hours > div, .toggler{
+.hours > div, .toggler, #src-code{
     padding: 3px 5px 3px 5px;
     border-radius: 10px;
     box-shadow: 2px 2px 9px 2px black;
@@ -135,11 +155,14 @@ form input::placeholder {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
 }
 .toggler div {
-    flex: 1 1 auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 20px 2px white;
     padding: 4px;
+    width: 100%;
+    cursor: pointer;
+    height: 100%;
 
 }
 #giphy {
@@ -149,18 +172,18 @@ form input::placeholder {
 }
 
 #dialog {
-    position: absolute;
-    top: 30%;
-    left: 36%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
     border: 10px groove rgb(0, 0, 255, 0.5);
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
     color: rgb(255, 204, 204);
 }
 #dialog::backdrop {
-    background: rgb(0, 0, 0, 0.9);
-
+    background: rgb(0, 0, 0, 0.8);
 }
 #online {
     background: rgb(0, 128, 0, 0.9);
@@ -175,4 +198,73 @@ form input::placeholder {
 }
 .err {
     color: red
+}
+
+@keyframes codee {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+.dev {
+    position: absolute;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+#developer {
+    padding: 15px 10px 15px 10px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 9px 6px gold;
+    font-weight: 1000;
+    font-size: 20px;
+    color: gold;
+    width:  fit-content;
+    animation: codee 5s linear infinite;
+    cursor: pointer;
+}
+
+#rope {
+    height: 100px;
+    background: #0ad8cb;
+    width: 3px;
+    align-self: center;
+    border-radius: 25px;
+}
+.code {
+    display: none;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    padding: 20px;
+}
+.code img {
+    width: 40px;
+}
+#dev-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+#src-code {
+    background: none;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 22px;
+}
+#src-code:hover {
+    background: #0ad8cb;
+}
+#social {
+    display: flex;
+    gap: 20px;
+    
+}
+#social img {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    box-shadow: 3px 3px 7px 5px rgb(3, 28, 28);
 }

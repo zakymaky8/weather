@@ -1,15 +1,17 @@
 import loading from './loadgif.jpg';
 import notfound from './notfound.jpg';
-
 import './style.css'
 
 //search
 const srch = document.querySelector('#search');
 const trigger = document.querySelector('#trigger');
+const serFor = document.querySelector('#srch-value');
+const formSrch = document.querySelector('form')
 
 // menu
 const currentMenu =  document.querySelector('#cur')
 const fore = document.querySelector('#fore')
+const dev = document.querySelector('#developer');
 
 //scales
 const degFara = document.querySelector('#f');
@@ -24,6 +26,7 @@ const spelNotice = document.querySelector('#spell-notice')
 //contents on menu
 const detail = document.querySelector('.detail')
 const forcast = document.querySelector('.forecast')
+const codeMenu = document.querySelector('.code');
 
 //currents
 const curTemp =  document.querySelector('#temp');
@@ -110,10 +113,10 @@ let monInYear = {
     12: 'December'
 }
 
-
 srch.oninput = () => {
-    srch.value = (srch.value !== '') ? srch.value[0].toUpperCase() + srch.value.slice(1,): null
+    srch.value = (srch.value !== '') ? srch.value[0].toUpperCase() + srch.value.slice(1,): null;
 }
+
 nexTomo.textContent = daysInWeek[new Date().getDay() + 2];
 giphyImg.src = loading;
 
@@ -121,7 +124,7 @@ let scale = 'c'
 let issuDay = 0;
 let data;
 let requiredData;
-
+let success = true;
 
 function fetchGiphy(text) {
     fetch(`https://api.giphy.com/v1/gifs/translate?api_key=op0jnaciYHkf9yQkb6xtyFYnAUgeeJrD&s=${text}`)
@@ -137,6 +140,11 @@ function addBg(el1, el2, el3) {
     el3 !== undefined ? el3.style.background = 'none' : null;
 }
 
+function showMenu(menu1, menu2, menu3) {
+    menu1.style.display = 'flex';
+    menu2.style.display = 'none';
+    menu3.style.display = 'none';
+}
 //scale toggle
 
 let getLocation = new Promise((resolve)=>{
@@ -170,7 +178,7 @@ async function hitWeatherAPI(location) {
 }
 
 async function getRequiredData(day) {
-    let data = await hitWeatherAPI(srch.value);
+    let data = await hitWeatherAPI(success ? serFor.textContent : srch.value);
 
     requiredData = {
         current: {
@@ -209,6 +217,12 @@ function getWithHourlyData(name, hr) {
         temp: scale==='c' ? data.forecast.forecastday[issuDay].hour[hr].temp_c  + ' °C': data.forecast.forecastday[issuDay].hour[hr].temp_f + ' °F',
         chanceOfRain: data.forecast.forecastday[issuDay].hour[hr].chance_of_rain + '%'
     }
+}
+
+function bgIntial() {
+    today.style.background =  issuDay===0 ? 'rgb(255,122,11,.5)' : 'none';
+    degCel.style.background = scale==='c' ?  'rgb(255,122,11,.5)' : 'none';
+    currentMenu.style.background = 'rgb(255,122,11,.5)'
 }
 
 async function filtereData() {
@@ -284,15 +298,16 @@ function renderOnUi() {
 
 window.onload = async() =>{
     dialog.showModal()
-    today.style.background =  issuDay===0 ? 'rgb(255,122,11,.5)' : 'none';
-    degCel.style.background = scale==='c' ?  'rgb(255,122,11,.5)' : 'none';
-    currentMenu.style.background = 'rgb(255,122,11,.5)'
+    bgIntial()
     try {
         let latlon = await getLocation;
         srch.value = latlon;
+        serFor.textContent = latlon;
     }
     catch (e) {
         srch.value = '9.0423107, 38.7675644'
+        serFor.textContent = srch.value;
+
     }
     data = await getRequiredData(issuDay)
     filtereData()
@@ -302,20 +317,28 @@ window.onload = async() =>{
 //search trigerer
 
 trigger.addEventListener('click', async (e)=>{
+    serFor.textContent = srch.value;
     e.preventDefault();
     dialog.showModal()
     try {
         data = await getRequiredData(issuDay)
         filtereData()
         fetchGiphy(requiredData.current.text)
+        searchStatus('rgb(90, 255, 13)', 'none')
     }
     catch (e) {
         srch.value = 'Addis Ababa';
+        success = false
+        searchStatus('red', 'line-through')
         spelNotice.style.display = 'inline'
-        setTimeout(()=>spelNotice.style.display='none',2000)
+        setTimeout(()=>spelNotice.style.display='none', 4000)
     }
 })
 
+function searchStatus(colr, srtrw) {
+    serFor.style.textDecoration = srtrw;
+    serFor.style.color = colr;
+}
 // scale togglers
 degCel.onclick = async () => {
     scale = 'c';
@@ -359,18 +382,26 @@ window.addEventListener('offline', ()=>{
     setTimeout(()=>dialog.close(), 2500)
 })
 window.addEventListener('online', ()=>{
-    dialog.innerHTML = 'back online' + ' <br><br> <button style="float: right" onclick="()=>dialog.close()"> OK </button>'
+    dialog.textContent = 'Back online'
+    dialog.showModal()
     onlineBadge.style.visibility = 'visible'
     document.location.reload()
 })
+
 // type of data togglers
+
 currentMenu.onclick = () =>{
-    detail.style.display = 'flex';
-    forcast.style.display = 'none'
-    addBg(currentMenu, fore)
+    showMenu(detail, forcast, codeMenu);
+    addBg(currentMenu, fore, dev)
+    formSrch.style.display = 'flex'
 }
 fore.onclick = () => {
-    detail.style.display = 'none';
-    forcast.style.display = 'flex'
-    addBg(fore, currentMenu)
+    showMenu(forcast, detail, codeMenu)
+    addBg(fore, currentMenu, dev)
+    formSrch.style.display = 'flex'
+}
+dev.onclick = () => {
+    showMenu(codeMenu, detail, forcast)
+    addBg(dev, fore, currentMenu)
+    formSrch.style.display = 'none'
 }

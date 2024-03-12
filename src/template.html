@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./weat-icon.png">
     <title>Weather App</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-
     <div class="container">
         <header class="header">
             <div class="logo">
@@ -28,9 +27,13 @@
         </header>
 
         <form>
-            <input type="search" name="search" id="search"  placeholder="country or lat, lon">
+            <input type="search" name="search" id="search"  placeholder="place or zip code">
             <input type="submit" value="Go" id="trigger">
+            <div id="searc">
+                Search: "<span id="srch-value"></span>"
+            </div>
         </form>
+
         <span id="spell-notice" style="color: red; background: rgb(0,0,0); display: none; text-align: center; padding: 10px">Name it safely</span>
 
         <div class="detail">
@@ -146,13 +149,38 @@
 
             </div>
         </div>
-
+        <div class="dev">
+            <div id="rope"></div>
+            <div id="developer">Code</div>
+        </div>
+        <div class="code">
+            <div id="image">
+                <figure>
+                    <img src="./me.jpg" alt="developer" id="dev-img">
+                </figure><br>
+                <caption style="text-align: center; margin-left: 20px">By: Zekaryas Mekuaninit</caption>
+            </div>
+            <div>
+                <a href="https://github.com/zakymaky8/weather">
+                    <button id="src-code">Source Code</button>
+                </a>
+            </div>
+            <div id="social">
+                <a href="https://github.com/zakymaky8">
+                    <img src="./github.svg" alt="github">
+                </a>
+                <a href="https://www.linkedin.com/in/gizachew-m-a41a57247/">
+                    <img src="./linkedIn.svg" alt="linked in">
+                </a>
+                <a href="https://www.instagram.com/zekaryasmekuaninit/">
+                    <img src="./insta.png" alt="instagram">
+                </a>
+            </div>
+        </div>
     </div>
     <div id="online">Back online</div>
-    
     <dialog id="dialog">
         Please wait ...
     </dialog>
-    <!-- <script type="module" src="index.js"></script> -->
 </body>
 </html>
