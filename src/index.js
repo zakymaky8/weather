@@ -117,7 +117,15 @@ srch.oninput = () => {
     srch.value = (srch.value !== '') ? srch.value[0].toUpperCase() + srch.value.slice(1,): null;
 }
 
-nexTomo.textContent = daysInWeek[new Date().getDay() + 2];
+if (new Date().getDay()==5) {
+    nexTomo.textContent = 'Sunday'
+}
+else if (new Date().getDay()==6) {
+    nexTomo.textContent = 'Monday'
+}
+else {
+    nexTomo.textContent =  daysInWeek[new Date().getDay() + 2];
+}
 giphyImg.src = loading;
 
 let scale = 'c'
